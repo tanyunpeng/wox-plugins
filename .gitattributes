@@ -1,0 +1,6 @@
+# 部署副本要和仓库副本逐字节相同（install.mjs 用 copyFileSync，验证靠 cmp），
+# 所以换行符不许被 autocrlf 改写。
+* text eol=lf
+*.wasm binary
+*.png binary
+*.ico binary

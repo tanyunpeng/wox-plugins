@@ -1,0 +1,24 @@
+{
+  "name": "wox-plugin-bitwarden",
+  "version": "2026.10.0",
+  "private": true,
+  "description": "Wox plugin for a self-hosted Vaultwarden vault",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "check": "node build/verify.mjs",
+    "test": "node --test test/totp.test.js test/search.test.js test/favicon.test.js test/client.test.js test/plugin.test.js test/time.test.js",
+    "package": "node build/package.mjs",
+    "gate:local": "node spike/gate4-selftest.js",
+    "gate": "node spike/gate4.js"
+  },
+  "dependencies": {
+    "@bitwarden/sdk-internal": "0.2.0-main.1105"
+  },
+  "devDependencies": {
+    "@noble/hashes": "2.4.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

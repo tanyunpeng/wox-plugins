@@ -1,0 +1,10 @@
+# 参考镜像，不是本仓库的产物
+/wox-src/
+/_ref/
+
+# 构建产物与依赖
+node_modules/
+/Wox.Plugin.bitwarden/dist/
+/Wox.Plugin.bitwarden/dist-test/
+*.wox
+*.zip

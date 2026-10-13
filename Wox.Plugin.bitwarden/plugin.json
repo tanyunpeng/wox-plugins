@@ -1,0 +1,218 @@
+{
+  "Id": "b7f4c2a1-3d6e-4f8a-9c2b-5a1e8d7f6b30",
+  "Name": "i18n:plugin_name",
+  "Description": "i18n:plugin_description",
+  "Author": "tanyp",
+  "Website": "https://github.com/tanyunpeng/wox-plugins",
+  "Version": "2026.10.0",
+  "MinWoxVersion": "2.4.6",
+  "Runtime": "NODEJS",
+  "Entry": "index.js",
+  "Icon": "svg:<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><rect width=\"48\" height=\"48\" rx=\"12\" fill=\"#175ddc\"/><path fill=\"none\" stroke=\"#fff\" stroke-width=\"3.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M24 10l11 4v9c0 7-4.6 11.6-11 15-6.4-3.4-11-8-11-15v-9z\"/><path fill=\"#fff\" d=\"M24 19a3.2 3.2 0 0 0-1.6 6 3.2 3.2 0 0 0 4.6 3.6l-1.4 3-4-2v-2.6a5.6 5.6 0 1 1 5.6-5.6z\"/></svg>",
+  "TriggerKeywords": [
+    "pw"
+  ],
+  "SupportedOS": [
+    "Windows",
+    "Linux",
+    "Darwin"
+  ],
+  "Commands": [
+    {
+      "Command": "lock",
+      "Description": "i18n:lock_command"
+    }
+  ],
+  "Features": [
+    {
+      "Name": "debounce",
+      "Params": {
+        "IntervalMs": 250
+      }
+    }
+  ],
+  "SettingDefinitions": [
+    {
+      "Type": "head",
+      "Value": {
+        "Content": "i18n:settings_connection",
+        "Tooltip": "i18n:settings_connection_tooltip"
+      }
+    },
+    {
+      "Type": "textbox",
+      "Value": {
+        "Key": "serverUrl",
+        "Label": "i18n:server_url",
+        "DefaultValue": "https://vault.bitwarden.com",
+        "Tooltip": "i18n:server_url_tooltip",
+        "MaxLines": 1,
+        "Suffix": "",
+        "Validators": [
+          {
+            "Type": "not_empty",
+            "Value": {}
+          }
+        ]
+      },
+      "IsPlatformSpecific": false
+    },
+    {
+      "Type": "label",
+      "Value": {
+        "Content": "i18n:settings_security_note",
+        "Tooltip": ""
+      }
+    }
+  ],
+  "QueryRequirements": {
+    "AnyQuery": [
+      {
+        "SettingKey": "serverUrl",
+        "Message": "i18n:server_url_required"
+      }
+    ],
+    "QueryWithoutCommand": [],
+    "QueryWithCommand": {}
+  },
+  "I18n": {
+    "en_US": {
+      "plugin_name": "Bitwarden Vault",
+      "plugin_description": "Search a Bitwarden or Vaultwarden vault and copy usernames, passwords and 2FA codes",
+      "settings_connection": "Vaultwarden server",
+      "settings_connection_tooltip": "Base URL of your self-hosted Vaultwarden server",
+      "server_url": "Server URL",
+      "server_url_tooltip": "Defaults to the official cloud at https://vault.bitwarden.com; replace it with your own Vaultwarden URL. No /api or /identity suffix is needed.",
+      "server_url_required": "Set the server URL in the plugin settings first",
+      "settings_security_note": "The master password is typed into a form and kept only in memory; it is never saved. Logins are limited by the server to about one per minute.",
+      "lock_command": "Lock: drop the vault keys from memory",
+      "login_subtitle": "Server: {server}",
+      "login_preview": "Enter your account email and master password.\n\nThe master password is used once to derive the vault key and is then dropped. It is never written to settings or disk.",
+      "unlock_title": "Unlock your vault",
+      "login_action": "Log in",
+      "field_email": "Email",
+      "field_master_password": "Master password",
+      "login_success": "Vault unlocked",
+      "lock_title": "Lock the vault",
+      "lock_subtitle": "Removes vault keys from memory, keeps this session",
+      "lock_action": "Lock now",
+      "lock_done": "Vault locked",
+      "already_locked_title": "Vault is already locked",
+      "already_locked_subtitle": "Type pw and enter the master password to unlock",
+      "no_results": "No matching items",
+      "no_results_subtitle": "Try a name, username or domain",
+      "no_username_or_uri": "No username or URI",
+      "copy_password": "Copy password",
+      "copy_username": "Copy username",
+      "copy_totp": "Copy verification code",
+      "copy_field": "Copy field",
+      "copy_name": "Copy name",
+      "copy_uri": "Copy link",
+      "toggle_secret": "Show / hide password",
+      "password_copied": "Password copied",
+      "username_copied": "Username copied",
+      "uri_copied": "Link copied",
+      "field_copied": "Field copied",
+      "totp_copied": "Copied {code}, valid {seconds}s",
+      "totp_failed": "Cannot generate this verification code",
+      "totp_unavailable": "Verification code secret cannot be read",
+      "totp_expires": "valid until {time}",
+      "totp_period": " ({seconds}s window)",
+      "decrypt_failed": "Could not decrypt this field",
+      "nothing_to_copy": "This field is empty",
+      "field_username": "Username",
+      "field_password": "Password",
+      "field_uris": "URIs",
+      "primary_uri": "primary",
+      "field_totp": "Verification code",
+      "field_note": "Note",
+      "field_folder": "Folder",
+      "field_scope": "Owner",
+      "scope_org": "Organization",
+      "scope_personal": "You",
+      "field_updated": "Updated",
+      "tag_revealed": "Password shown",
+      "tag_hidden": "Password hidden",
+      "error_title": "Vaultwarden request failed",
+      "err_password_wrong": "Wrong email or master password",
+      "err_2fa_unsupported": "This account uses two-step login, which this plugin does not support yet",
+      "err_rate_limited": "Too many login attempts, wait about a minute",
+      "err_session_expired": "Session expired, run pw and enter the master password again",
+      "err_legacy_key": "This account uses the legacy key format without a user key, which is not supported",
+      "err_argon2": "This account uses Argon2id, which is not supported yet",
+      "err_prelogin": "Could not read the key derivation settings for this account",
+      "err_locked": "The vault is locked, run pw to unlock",
+      "err_unreachable": "Cannot reach the Vaultwarden server",
+      "err_generic": "Request failed, check the plugin log"
+    },
+    "zh_CN": {
+      "plugin_name": "Bitwarden 密码库",
+      "plugin_description": "搜索 Bitwarden 官方云或自建 Vaultwarden 密码库，复制用户名、密码与两步验证码",
+      "settings_connection": "Vaultwarden 服务器",
+      "settings_connection_tooltip": "私有化部署的 Vaultwarden 服务器地址",
+      "server_url": "服务器地址",
+      "server_url_tooltip": "默认是官方云 https://vault.bitwarden.com，自建 Vaultwarden 就换成你自己的地址；不需要带 /api 或 /identity 后缀",
+      "server_url_required": "请先在插件设置里填写服务器地址",
+      "settings_security_note": "主密码只在表单里输入一次、仅存内存，绝不落盘；服务端登录约每分钟一次限流，请勿反复试错。",
+      "lock_command": "锁定：从内存丢弃密码库密钥",
+      "login_subtitle": "服务器：{server}",
+      "login_preview": "输入账号邮箱和主密码。\n\n主密码只用于派生密码库密钥，用完即弃，不写入设置或磁盘。",
+      "unlock_title": "解锁密码库",
+      "login_action": "登录",
+      "field_email": "邮箱",
+      "field_master_password": "主密码",
+      "login_success": "密码库已解锁",
+      "lock_title": "锁定密码库",
+      "lock_subtitle": "从内存丢弃密钥，保留本次会话",
+      "lock_action": "立即锁定",
+      "lock_done": "已锁定",
+      "already_locked_title": "密码库已经处于锁定状态",
+      "already_locked_subtitle": "输入 pw 填主密码即可解锁",
+      "no_results": "没有匹配的条目",
+      "no_results_subtitle": "试试名称、用户名或域名",
+      "no_username_or_uri": "无用户名或网址",
+      "copy_password": "复制密码",
+      "copy_username": "复制用户名",
+      "copy_totp": "复制验证码",
+      "copy_field": "复制字段",
+      "copy_name": "复制名称",
+      "copy_uri": "复制网址",
+      "toggle_secret": "显示/隐藏密码",
+      "password_copied": "已复制密码",
+      "username_copied": "已复制用户名",
+      "uri_copied": "已复制网址",
+      "field_copied": "已复制字段",
+      "totp_copied": "已复制 {code}，{seconds} 秒内有效",
+      "totp_failed": "无法生成该验证码",
+      "totp_unavailable": "无法读取验证码密钥",
+      "totp_expires": "至 {time} 有效",
+      "totp_period": "（{seconds} 秒一轮）",
+      "decrypt_failed": "该字段解密失败",
+      "nothing_to_copy": "该字段为空",
+      "field_username": "用户名",
+      "field_password": "密码",
+      "field_uris": "网址",
+      "primary_uri": "主",
+      "field_totp": "验证码",
+      "field_note": "备注",
+      "field_folder": "文件夹",
+      "field_scope": "所有者",
+      "scope_org": "组织",
+      "scope_personal": "您",
+      "field_updated": "更新于",
+      "tag_revealed": "密码已显示",
+      "tag_hidden": "密码已隐藏",
+      "error_title": "Vaultwarden 请求失败",
+      "err_password_wrong": "邮箱或主密码不正确",
+      "err_2fa_unsupported": "该账号启用了两步登录，当前插件版本还不支持",
+      "err_rate_limited": "登录过于频繁，请约一分钟后重试",
+      "err_session_expired": "会话已过期，重新输入 pw 并填主密码",
+      "err_legacy_key": "该账号使用没有 UserKey 的旧版密钥格式，暂不支持",
+      "err_argon2": "该账号使用 Argon2id，暂不支持",
+      "err_prelogin": "无法读取该账号的密钥派生参数",
+      "err_locked": "密码库已锁定，输入 pw 解锁",
+      "err_unreachable": "无法连接 Vaultwarden 服务器",
+      "err_generic": "请求失败，请查看插件日志"
+    }
+  }
+}
