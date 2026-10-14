@@ -8,3 +8,4 @@ node_modules/
 /Wox.Plugin.bitwarden/dist-test/
 *.wox
 *.zip
+/Wox.Plugin.Todo/dist/

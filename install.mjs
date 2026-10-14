@@ -1,4 +1,4 @@
-// Install both plugins from this repository into the running Wox.
+// Install the three plugins from this repository into the running Wox.
 // Cross-platform: Windows, Linux and macOS all resolve the same ~/.wox/wox-user tree.
 // Repeatable: it only overwrites the deploy targets, never deletes user data.
 import { spawnSync } from "node:child_process";
@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 const root = path.dirname(fileURLToPath(import.meta.url));
 const live = path.join(homedir(), ".wox", "wox-user", "plugins", "single-file");
 const pluginDir = path.join(root, "Wox.Plugin.bitwarden");
+const todoDir = path.join(root, "Wox.Plugin.Todo");
 
 function run(cmd, args, cwd) {
   // shell:true is what makes `npm` resolve on Windows (npm.cmd); the command line is
@@ -36,10 +37,13 @@ try {
 }
 if (sqlite) {
   run("node", ["build/register-dev.cjs"], pluginDir);
+  run("node", ["build/register-dev.cjs"], todoDir);
   console.log("done. Restart Wox once so it re-scans the dev-plugin directory.");
   console.log("If register-dev reported 'database is locked', close Wox and run this script again.");
 } else {
   console.log(`Skipped dev-directory registration: this Node (${process.version}) has no node:sqlite, which was added in v22.5.0.`);
-  console.log("Add the folder by hand instead: Wox 设置 -> 插件 -> 本地插件目录 -> " + pluginDir);
+  console.log("Add both folders by hand instead: Wox 设置 -> 插件 -> 本地插件目录");
+  console.log("  " + pluginDir);
+  console.log("  " + todoDir);
   console.log("Everything above is installed, so pw and pt already work.");
 }

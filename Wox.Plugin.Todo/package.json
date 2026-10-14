@@ -1,0 +1,17 @@
+{
+  "name": "wox-plugin-todo",
+  "version": "0.2.1",
+  "private": true,
+  "description": "Todo list plugin for the Wox launcher",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "check": "node build/verify.mjs",
+    "test": "node --test \"test/*.test.js\"",
+    "package": "node build/package.mjs",
+    "register-dev": "node build/register-dev.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

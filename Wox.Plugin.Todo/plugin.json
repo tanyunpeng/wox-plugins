@@ -1,0 +1,106 @@
+{
+  "Id": "88b925b3-e79a-4a36-b7c7-e51d0ed5c907",
+  "Name": "i18n:plugin_name",
+  "Description": "i18n:plugin_description",
+  "Author": "tanyp",
+  "Website": "https://github.com/tanyunpeng/wox-plugins",
+  "Version": "0.2.1",
+  "MinWoxVersion": "2.4.6",
+  "Runtime": "NODEJS",
+  "Entry": "index.js",
+  "Icon": "svg:<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='12' fill='#2563eb'/><rect x='11' y='13' width='22' height='22' rx='5' fill='#ffffff'/><path d='M16.5 24.5l4 4 7.5-8.5' fill='none' stroke='#2563eb' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+  "TriggerKeywords": [
+    "td"
+  ],
+  "SupportedOS": [
+    "Windows",
+    "Linux",
+    "Darwin"
+  ],
+  "Features": [
+    {
+      "Name": "debounce",
+      "Params": {
+        "IntervalMs": 120
+      }
+    },
+    {
+      "Name": "ignoreAutoScore"
+    },
+    {
+      "Name": "mru",
+      "Params": {
+        "HashBy": "identityKey"
+      }
+    }
+  ],
+  "SettingDefinitions": [],
+  "I18n": {
+    "en_US": {
+      "plugin_name": "Todo",
+      "plugin_description": "Lightweight todo list in the launcher: filter by status, Enter checks a task off, everything is edited from the panel",
+      "filter_status": "Status",
+      "view_all": "All",
+      "view_pending": "Pending",
+      "view_done": "Done",
+      "badge_overdue": "Overdue",
+      "badge_today": "Today",
+      "badge_completed": "Done",
+      "action_complete": "Complete",
+      "action_reopen": "Reopen",
+      "action_delete": "Delete",
+      "action_edit": "Edit",
+      "action_pick_due": "Set due date",
+      "action_use_date": "Choose this date",
+      "action_back": "Back",
+      "cmd_new": "New task: td new buy milk",
+      "cmd_new_sub": "Enter to create the task",
+      "action_new_task": "New task",
+      "field_task_title": "Task",
+      "field_due": "Due date",
+      "empty_sub": "No tasks yet, type td new buy milk to add one",
+      "toast_task_done": "Task completed",
+      "toast_task_created": "Task created",
+      "toast_save_failed": "Could not save, nothing changed",
+      "toast_task_reopened": "Task reopened",
+      "toast_task_deleted": "Task deleted",
+      "toast_due_set": "Due date updated"
+    },
+    "zh_CN": {
+      "plugin_name": "待办",
+      "plugin_description": "启动器里的轻量待办：按状态筛选，回车勾选完成，全部操作都在面板上",
+      "filter_status": "状态",
+      "view_all": "全部",
+      "view_pending": "待处理",
+      "view_done": "已完成",
+      "badge_overdue": "逾期",
+      "badge_today": "今天",
+      "badge_completed": "完成于",
+      "action_complete": "勾选完成",
+      "action_reopen": "重新打开",
+      "action_delete": "删除",
+      "action_edit": "编辑",
+      "action_pick_due": "设置截止日期",
+      "action_use_date": "选择该日期",
+      "action_back": "返回",
+      "cmd_new": "新建待办：td new 买牛奶",
+      "cmd_new_sub": "回车即新建待办",
+      "action_new_task": "新建任务",
+      "field_task_title": "待办内容",
+      "field_due": "截止日期",
+      "empty_sub": "还没有任务，输入 td new 买牛奶 新建",
+      "toast_task_done": "任务已完成",
+      "toast_task_created": "任务已创建",
+      "toast_save_failed": "保存失败，任务未改动",
+      "toast_task_reopened": "任务已重新打开",
+      "toast_task_deleted": "任务已删除",
+      "toast_due_set": "截止日期已更新"
+    }
+  },
+  "Commands": [
+    {
+      "Command": "new",
+      "Description": "i18n:cmd_new"
+    }
+  ]
+}
