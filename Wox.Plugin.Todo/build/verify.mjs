@@ -41,7 +41,9 @@ for (const os of manifest.SupportedOS ?? []) {
 if (manifest.Entry !== "index.js" || !existsSync(path.join(root, "index.js"))) {
   problems.push("Entry index.js not found")
 }
-if (!manifest.TriggerKeywords.includes("td")) problems.push("trigger keyword td missing")
+for (const keyword of ["td", "todo"]) {
+  if (!manifest.TriggerKeywords.includes(keyword)) problems.push(`trigger keyword ${keyword} missing`)
+}
 // ShowInToolbar is a 2.4.6 capability the board layout depends on.
 const [maj, min] = String(manifest.MinWoxVersion).split(".").map(Number)
 if (maj < 2 || (maj === 2 && min < 4) || (maj === 2 && min === 4 && Number(String(manifest.MinWoxVersion).split(".")[2]) < 6)) {

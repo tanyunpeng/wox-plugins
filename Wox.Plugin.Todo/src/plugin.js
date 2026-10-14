@@ -18,8 +18,10 @@ const CMD_NEW = "new"
 // space (wox.core/plugin/query.go:634 `mustContainSpace`), so ChangeQuery("td") drops
 // out of the plugin and fires a global search for "td" through every plugin.
 // That is what killed the date picker: the leave callback cleared the state the
-// picker had just set (host log 2026-10-14 18:47:04).
-const TRIGGER = "td "
+// picker had just set (host log 2026-10-14 18:47:04). Only the fallback for a
+// query that has no keyword of its own (a global search); a keyword query reuses
+// the keyword the user typed, so `todo` does not rewrite his input to `td`.
+const DEFAULT_TRIGGER = "td "
 // How many days the picker lists. The launcher scrolls, but a row per day is
 // the honest limit of "pick from the list" without a date control.
 const DUE_DAYS = 14
@@ -53,6 +55,7 @@ class TodoPlugin {
     this.picker = null
     this.inCommand = false
     this.rawQuery = ""
+    this.trigger = DEFAULT_TRIGGER
     await this.load(ctx)
     this.zh = (await this.tr(ctx, "view_all")) === "全部"
     this.t = await this.formStrings(ctx)
@@ -97,6 +100,7 @@ class TodoPlugin {
     const command = (query.Command || "").toLowerCase()
     const search = (query.Search || "").trim()
     this.rawQuery = query.RawQuery || ""
+    this.trigger = query.TriggerKeyword ? `${query.TriggerKeyword} ` : DEFAULT_TRIGGER
     const refinements = query.Refinements || {}
     const status = ["all", "pending", "done"].includes(refinements.status) ? refinements.status : "all"
     // Whether the next mutation has to leave the command to show its result.
@@ -430,11 +434,11 @@ class TodoPlugin {
   }
 
   async showPicker(ctx) {
-    if (this.rawQuery === TRIGGER) {
+    if (this.rawQuery === this.trigger) {
       await this.api.RefreshQuery(ctx, { PreserveSelectedIndex: false })
       return
     }
-    await this.api.ChangeQuery(ctx, { QueryType: "input", QueryText: TRIGGER })
+    await this.api.ChangeQuery(ctx, { QueryType: "input", QueryText: this.trigger })
   }
 
   // --- form ------------------------------------------------------------
@@ -522,7 +526,7 @@ class TodoPlugin {
   // the screen never moves (his "新增任务没有响应", 2026-10-14).
   async afterCreate(ctx, id) {
     await this.notify(ctx, "toast_task_created")
-    if (this.inCommand) await this.api.ChangeQuery(ctx, { QueryType: "input", QueryText: TRIGGER })
+    if (this.inCommand) await this.api.ChangeQuery(ctx, { QueryType: "input", QueryText: this.trigger })
     await this.api.RefreshQuery(ctx, {
       PreserveSelectedIndex: false,
       SelectedResultId: `todo:task:${id}`,

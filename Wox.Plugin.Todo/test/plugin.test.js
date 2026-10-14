@@ -327,6 +327,23 @@ test("设置截止日期 is a toolbar action that repaints the list", async () =
   assert.deepEqual(api.calls.change, [{ QueryType: "input", QueryText: "td " }], "the trailing space keeps it a keyword query")
 })
 
+test("the keyword he typed is the one ChangeQuery writes back", async () => {
+  const api = makeApi()
+  const plugin = new TodoPlugin()
+  await plugin.init({}, { API: api })
+
+  const list = await plugin.query({}, { TriggerKeyword: "todo", RawQuery: "todo 月度", Search: "月度", Refinements: {} })
+  const due = action(rowOf(list, "月度更新"), "i18n:action_pick_due")
+  await due.Action({}, { ContextData: due.ContextData })
+  assert.deepEqual(api.calls.change, [{ QueryType: "input", QueryText: "todo " }], "the picker keeps his keyword")
+
+  api.calls.change.length = 0
+  const command = await plugin.query({}, { TriggerKeyword: "todo", Command: "new", Search: "买牛奶", Refinements: {} })
+  const create = command.Results[0].Actions[0]
+  await create.Action({}, { ContextData: create.ContextData })
+  assert.deepEqual(api.calls.change, [{ QueryType: "input", QueryText: "todo " }], "leaving the command keeps his keyword")
+})
+
 test("entering the picker from the bare keyword only refreshes the list", async () => {
   const api = makeApi()
   const plugin = new TodoPlugin()
